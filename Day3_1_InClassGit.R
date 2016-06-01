@@ -34,9 +34,22 @@ head(vetdata)
 ### Print out the answers.
 #=================================================================================
 
-#Start working here, commit and push changes when ready.
+vetdata[which(vetdata$Total == max(vetdata$Total)), 1] #State with most veterans 
+vetdata[which(vetdata$Total == min(vetdata$Total)), 1] #State with least veterans
 
+average <- mean(vetdata$Total)
+vetdata$closest <- abs(vetdata$Total - average)
+vetdata[which(vetdata$closest == min(vetdata$closest)), 1] #State closest to average
 
+vetdata$percent_pop <- vetdata$Total / vetdata$State.Population
+vetdata[which(vetdata$percent_pop == max(vetdata$percent_pop)), 1] #highest percent veterans
+vetdata[which(vetdata$percent_pop == min(vetdata$percent_pop)), 1] #lowest percent veterans  
+
+vetdata$average_percent_pop <- mean(vetdata$percent_pop)
+vetdata$closest_percent_pop <- abs(vetdata$percent_pop - vetdata$average_percent_pop)
+highest_percent_pop <- vetdata[which(vetdata$closest_percent_pop == min(vetdata$closest_percent_pop)), 1] #Closest to Average %
+
+paste("Highest number of vets: ", highest_percent_pop)
 
 
 #=================================================================================
